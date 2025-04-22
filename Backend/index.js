@@ -9,7 +9,7 @@ app.use(cors());
 
 // Ruta de prueba
 app.get('/ping', (req, res) => {
-  res.json({ message: 'Pong desde el servidor Express' });
+  res.json({ message: 'Pong desde el servidor USUAY ESTEVAN' });
 });
 
 app.listen(PORT, () => {

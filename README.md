@@ -2,7 +2,9 @@
 
 # npm – Gestor de paquetes de Node.js
 
-    - npm es el sistema de gestión de paquetes de Node.js. Permite instalar, compartir y administrar dependencias de proyectos JavaScript.
+    - npm es el sistema de gestión de paquetes de Node.js. 
+    
+    - Permite instalar, compartir y administrar dependencias de proyectos JavaScript.
 
     - El comando npm init crea un nuevo proyecto de Node.js. Al ejecutarlo, solicita información como el nombre del proyecto, versión, descripción, punto de entrada, etc.
 
@@ -16,7 +18,7 @@ Creación del archivo principal
 
 # Express.js
 
-    El comando npm i express instala el framework Express. Express permite crear servidores y gestionar rutas de manera sencilla y eficiente en aplicaciones Node.js.
+    El comando npm i express instala el framework Express. Express permite crear servidores y gestionar rutas de manera sencilla en aplicaciones Node.js.
 
 # Frontend – Proyecto con Vite
 

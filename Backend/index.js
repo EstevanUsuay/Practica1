@@ -79,34 +79,61 @@ app.get('/', (req, res) => {
 
 
 // Ruta principal (POST)
+// Ruta principal (POST)
 app.post('/', (req, res) => {
+  const datos = req.body;
+
   res.send(`
     <html>
       <head>
-        <title>Hola Mundo (POST)</title>
+        <title>Respuesta POST</title>
         <style>
           body {
-            background-color: #fff0f5;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+          }
+          .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
           }
           h1 {
-            color: #d6336c;
+            font-size: 2.5em;
+            color: #ffffff;
           }
           p {
-            font-size: 18px;
-            color: #555;
+            font-size: 1.1em;
+            color: #e0e0e0;
+          }
+          .json {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            font-family: monospace;
+            color: #ffeecc;
           }
         </style>
       </head>
       <body>
-        <h1>¡Hola Mundo con Node.js y Express (POST)!</h1>
-        <p>Ruta POST ejecutada correctamente.</p>
+        <div class="container">
+          <h1>¡POST recibido exitosamente!</h1>
+          <p>Servidor en AWS EC2 con Ubuntu y Node.js.</p>
+          <div class="json">
+            <strong>Datos recibidos:</strong><br>
+            ${JSON.stringify(datos, null, 2)}
+          </div>
+        </div>
       </body>
     </html>
   `);

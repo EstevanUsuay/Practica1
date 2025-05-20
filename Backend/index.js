@@ -22,39 +22,61 @@ app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 
-// Ruta principal (GET)
+// Ruta principal (mejorada visualmente)
 app.get('/', (req, res) => {
   res.send(`
     <html>
       <head>
-        <title>Hola Mundo</title>
+        <title>Servidor Node en AWS</title>
         <style>
           body {
-            background-color: #f0f8ff;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #141E30, #243B55);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+          }
+          .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
           }
           h1 {
-            color: #007acc;
+            font-size: 3em;
+            margin-bottom: 0.2em;
+            color: #00d8ff;
           }
           p {
-            font-size: 18px;
-            color: #333;
+            font-size: 1.2em;
+            color: #d1d1d1;
+          }
+          .tag {
+            margin-top: 1em;
+            font-size: 0.9em;
+            color: #aaa;
           }
         </style>
       </head>
       <body>
-        <h1>¡Hola Mundo con Node.js y Express!</h1>
-        <p>Ruta GET ejecutada correctamente.</p>
+        <div class="container">
+          <h1>¡Hola Mundo desde Node.js!</h1>
+          <p>Servidor corriendo en una instancia de <strong>AWS EC2 Ubuntu</strong>.</p>
+          <p>Desarrollado con Express y desplegado exitosamente 🚀</p>
+          <div class="tag">Powered by USUAY ESTEVAN</div>
+        </div>
       </body>
     </html>
   `);
 });
+
 
 // Ruta principal (POST)
 app.post('/', (req, res) => {

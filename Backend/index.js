@@ -128,7 +128,7 @@ app.post('/', (req, res) => {
       <body>
         <div class="container">
           <h1>¡POST recibido exitosamente!</h1>
-          <p>Servidor en AWS EC2 con Ubuntu y Node.js.</p>
+          <p>Servidor en AWS EC2 con Ubuntu/p>
           <div class="json">
             <strong>Datos recibidos:</strong><br>
             ${JSON.stringify(datos, null, 2)}

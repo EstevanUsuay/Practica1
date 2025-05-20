@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
   res.send(`
     <html>
       <head>
-        <title>Servidor Node en AWS</title>
+        <title>Instancia Ubuntu AWS</title>
         <style>
           body {
             margin: 0;
@@ -67,10 +67,10 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div class="container">
-          <h1>¡Hola Mundo desde Node.js!</h1>
+          <h1>¡Hola Mundo HERRAMIENTAS EXAMEN!</h1>
           <p>Servidor corriendo en una instancia de <strong>AWS EC2 Ubuntu</strong>.</p>
-          <p>Desarrollado con Express y desplegado exitosamente 🚀</p>
-          <div class="tag">Powered by USUAY ESTEVAN</div>
+          <p>Desarrollado con Express y desplegado exitosamente <3</p>
+          <div class="tag">USUAY MORILLO ESTEVAN ALEJANDRO</div>
         </div>
       </body>
     </html>

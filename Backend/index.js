@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div class="container">
-          <h1>¡Hola Mundo HERRAMIENTAS EXAMEN!</h1>
+          <h1>¡Hola Mundo!</h1>
           <p>Servidor corriendo en una instancia de <strong>AWS EC2 Ubuntu</strong>.</p>
           <p>Desarrollado con Express y desplegado exitosamente <3</p>
           <div class="tag">USUAY MORILLO ESTEVAN ALEJANDRO</div>

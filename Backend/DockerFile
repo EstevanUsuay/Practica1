@@ -1,0 +1,19 @@
+FROM node:20.10.0-alpine3.18
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia package.json y package-lock.json (si existe) para aprovechar la cache de Docker
+COPY package.json .
+
+# Instala dependencias
+RUN npm install
+
+# Copia el resto del código
+COPY index.js
+
+# Expone el puerto que usará la app
+EXPOSE 3000
+
+# Comando para iniciar la app
+CMD ["node", "index.js"]

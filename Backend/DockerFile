@@ -6,7 +6,7 @@ COPY package.json
 
 RUN npm i 
 
-COPY index.js 
+COPY index.js .
 
 EXPOSE 3000 
 

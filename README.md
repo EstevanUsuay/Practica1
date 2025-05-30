@@ -1,3 +1,15 @@
+# API REST de Libros en Node.js con Express
+
+Este proyecto es un Web Service RESTful para gestionar libros con operaciones CRUD y filtrado por autor.
+
+## Descripción de los endpoints
+
+### GET /
+Mensaje de bienvenida.
+
+**Respuesta:**
+
+
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE
 
 # npm – Gestor de paquetes de Node.js

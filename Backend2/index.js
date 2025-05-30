@@ -41,8 +41,25 @@ server.post('/libros', (req, res) => {
 
 // Obtener todos los libros
 server.get('/libros', (req, res) => {
+    const { autor } = req.query;
+
+    if (autor) {
+        const librosFiltrados = libros.filter(libro =>
+            libro.autor.toLowerCase().includes(autor.toLowerCase())
+        );
+
+        // Si no se encuentra ningún libro que coincida
+        if (librosFiltrados.length === 0) {
+            return res.status(404).json({ mensaje: `No se encontraron libros del autor "${autor}"` });
+        }
+
+        return res.json(librosFiltrados);
+    }
+
+    // Si no se pasó el filtro, devolver todos
     res.json(libros);
 });
+
 
 // Obtener un libro por su ID
 server.get('/libros/:id', (req, res) => {

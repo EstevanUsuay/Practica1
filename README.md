@@ -226,6 +226,12 @@ sudo docker run -d -p 3000:3000 --name hello --restart on-failure node-hello:lat
 
 
 
+
+
+
+
+
+
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE
 
 # npm – Gestor de paquetes de Node.js

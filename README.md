@@ -36,12 +36,11 @@ Devuelve una lista con todos los libros almacenados en la aplicación.
 - Si se pasa el parámetro `autor`, devuelve solo los libros cuyo autor contenga la cadena buscada (la búsqueda no distingue mayúsculas o minúsculas).
 
 **Ejemplo sin filtro:**
-
 GET http://3.133.95.14:3000/libros
-
 
 Respuesta:
 
+```json
 [
   {
     "id": 1,
@@ -54,11 +53,12 @@ Respuesta:
     "autor": "Miguel de Cervantes"
   }
 ]
+```json
 
 Ejemplo con filtro por autor:
 GET http://3.133.95.14:3000/libros?autor=Gabriel
 
-**Respuesta (si hay coincidencias):**
+Respuesta (si hay coincidencias):
 [
   {
     "id": 1,
@@ -67,11 +67,10 @@ GET http://3.133.95.14:3000/libros?autor=Gabriel
   }
 ]
 
-**Respuesta (si no hay coincidencias):**
+Respuesta (si no hay coincidencias):
 {
   "mensaje": "No se encontraron libros del autor \"Gabriel\""
 }
-
 
 
 

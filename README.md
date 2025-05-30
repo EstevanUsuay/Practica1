@@ -1,13 +1,47 @@
 # API REST de Libros en Node.js con Express
 
-Este proyecto es un Web Service RESTful para gestionar libros con operaciones CRUD y filtrado por autor.
+Este proyecto es un servicio web RESTful desarrollado con Node.js y Express, que permite gestionar una colección de libros. La API ofrece funcionalidades para crear, leer, actualizar y eliminar libros, así como para filtrar libros por autor usando parámetros en la URL.
+
+---
 
 ## Descripción de los endpoints
 
 ### GET /
-Mensaje de bienvenida.
+
+Devuelve un mensaje de bienvenida para confirmar que la API está activa.
 
 **Respuesta:**
+
+API REST de libros en Node.js con Express
+
+---
+
+### GET /libros
+
+Obtiene todos los libros disponibles o filtra por autor si se pasa el parámetro `autor`.
+
+- Sin parámetro `autor`: devuelve todos los libros.
+- Con parámetro `autor`: devuelve solo libros cuyo autor contenga el texto buscado (búsqueda insensible a mayúsculas/minúsculas).
+
+**Ejemplo sin filtro:**
+
+
+**Respuesta:**
+
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez"
+  },
+  {
+    "id": 2,
+    "titulo": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes"
+  }
+]
+
 
 
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE

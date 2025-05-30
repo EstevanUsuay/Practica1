@@ -43,7 +43,7 @@ Obtiene todos los libros disponibles o filtra por autor si se pasa el parámetro
 ]
 
 
-
+---
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE
 
 # npm – Gestor de paquetes de Node.js

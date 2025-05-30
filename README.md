@@ -1,32 +1,46 @@
 # API REST de Libros en Node.js con Express
 
-Este proyecto es un servicio web RESTful desarrollado con Node.js y Express, que permite gestionar una colección de libros. La API ofrece funcionalidades para crear, leer, actualizar y eliminar libros, así como para filtrar libros por autor usando parámetros en la URL.
+Este proyecto es un servicio web RESTful desarrollado con Node.js y Express para gestionar una colección de libros. Permite crear, leer, actualizar y eliminar libros, además de filtrar libros por autor.
 
 ---
 
-## Descripción de los endpoints
+## URLs base para consumir la API
 
-### GET /
+La API está desplegada y accesible desde:
 
-Devuelve un mensaje de bienvenida para confirmar que la API está activa.
+http://3.133.95.14:3000
 
-**Respuesta:**
 
-API REST de libros en Node.js con Express
+Los endpoints disponibles son:
+
+| Método | Endpoint                         | Descripción                   |
+|--------|---------------------------------|-------------------------------|
+| GET    | `/libros`                      | Obtener todos los libros       |
+| GET    | `/libros?autor=<nombre>`       | Filtrar libros por autor       |
+| GET    | `/libros/:id`                  | Obtener libro por ID           |
+| POST   | `/libros`                      | Crear un nuevo libro           |
+| PUT    | `/libros/:id`                  | Actualizar libro por ID        |
+| DELETE | `/libros/:id`                  | Eliminar libro por ID          |
 
 ---
+
+## Explicación detallada de los endpoints principales
 
 ### GET /libros
 
-Obtiene todos los libros disponibles o filtra por autor si se pasa el parámetro `autor`.
+**Qué hace:**  
+Devuelve una lista con todos los libros almacenados en la aplicación.
 
-- Sin parámetro `autor`: devuelve todos los libros.
-- Con parámetro `autor`: devuelve solo libros cuyo autor contenga el texto buscado (búsqueda insensible a mayúsculas/minúsculas).
+**Uso:**  
+- Si no se envía ningún parámetro, devuelve todos los libros.  
+- Si se pasa el parámetro `autor`, devuelve solo los libros cuyo autor contenga la cadena buscada (la búsqueda no distingue mayúsculas o minúsculas).
 
 **Ejemplo sin filtro:**
 
+GET http://3.133.95.14:3000/libros
 
-**Respuesta:**
+
+Respuesta:
 
 ```json
 [
@@ -42,8 +56,27 @@ Obtiene todos los libros disponibles o filtra por autor si se pasa el parámetro
   }
 ]
 
+Ejemplo con filtro por autor:
+GET http://3.133.95.14:3000/libros?autor=Gabriel
 
----
+Respuesta (si hay coincidencias):
+[
+  {
+    "id": 1,
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez"
+  }
+]
+
+Respuesta (si no hay coincidencias):
+{
+  "mensaje": "No se encontraron libros del autor \"Gabriel\""
+}
+
+
+
+
+
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE
 
 # npm – Gestor de paquetes de Node.js

@@ -190,7 +190,7 @@ sudo systemctl status docker
 
 ---
 
-## Dockerfile explicado
+## Dockerfile 
 
 ```dockerfile
 FROM node:20.10.0-alpine3.18     # Imagen base ligera con Node.js

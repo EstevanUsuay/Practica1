@@ -72,7 +72,45 @@ Respuesta (si no hay coincidencias):
   "mensaje": "No se encontraron libros del autor \"Gabriel\""
 }
 
+GET /libros/:id
+Qué hace:
+Devuelve un solo libro identificado por su id.
 
+Ejemplo:
+GET http://3.133.95.14:3000/libros/1
+Respuesta exitosa:
+{
+  "id": 1,
+  "titulo": "Cien Años de Soledad",
+  "autor": "Gabriel García Márquez"
+}
+
+Respuesta si no existe el libro:
+{
+  "mensaje": "Libro no encontrado"
+}
+
+POST /libros
+Qué hace:
+Crea un nuevo libro. Se debe enviar un JSON con las propiedades titulo y autor.
+
+Ejemplo de cuerpo de la solicitud (request body):
+{
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar"
+}
+
+Respuesta:
+Devuelve el libro creado con un ID asignado automáticamente.
+
+{
+  "id": 3,
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar"
+}
+
+Validación:
+Si falta el título o el autor, responde con error 400 y mensaje indicando que ambos son obligatorios.
 
 
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE

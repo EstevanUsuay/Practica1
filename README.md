@@ -1,3 +1,8 @@
+Claro, aquí tienes un README completo en un solo bloque, listo para pegar:
+
+markdown
+Copiar
+Editar
 # API REST de Libros en Node.js con Express
 
 Este proyecto es un Web Service RESTful para gestionar libros con operaciones CRUD y filtrado por autor.
@@ -8,6 +13,169 @@ Este proyecto es un Web Service RESTful para gestionar libros con operaciones CR
 Mensaje de bienvenida.
 
 **Respuesta:**
+API REST de libros en Node.js con Express
+
+yaml
+Copiar
+Editar
+
+---
+
+### GET /libros
+Obtiene todos los libros.
+
+**Respuesta ejemplo:**
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez"
+  },
+  {
+    "id": 2,
+    "titulo": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes"
+  }
+]
+GET /libros?autor=nombre
+Filtra libros por autor (búsqueda parcial, sin distinción de mayúsculas).
+
+Ejemplo request:
+
+bash
+Copiar
+Editar
+GET /libros?autor=Gabriel
+Respuesta si hay coincidencias:
+
+json
+Copiar
+Editar
+[
+  {
+    "id": 1,
+    "titulo": "Cien Años de Soledad",
+    "autor": "Gabriel García Márquez"
+  }
+]
+Respuesta si no hay coincidencias:
+
+json
+Copiar
+Editar
+{
+  "mensaje": "No se encontraron libros del autor \"Gabriel\""
+}
+GET /libros/:id
+Obtiene un libro por su ID.
+
+Ejemplo request:
+
+bash
+Copiar
+Editar
+GET /libros/1
+Respuesta:
+
+json
+Copiar
+Editar
+{
+  "id": 1,
+  "titulo": "Cien Años de Soledad",
+  "autor": "Gabriel García Márquez"
+}
+Respuesta si no existe el libro:
+
+json
+Copiar
+Editar
+{
+  "mensaje": "Libro no encontrado"
+}
+POST /libros
+Crea un libro nuevo.
+
+Ejemplo request:
+
+json
+Copiar
+Editar
+{
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar"
+}
+Respuesta:
+
+json
+Copiar
+Editar
+{
+  "id": 3,
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar"
+}
+PUT /libros/:id
+Actualiza un libro existente.
+
+Ejemplo request:
+
+json
+Copiar
+Editar
+{
+  "titulo": "Rayuela (Edición Revisada)",
+  "autor": "Julio Cortázar"
+}
+Respuesta:
+
+json
+Copiar
+Editar
+{
+  "id": 3,
+  "titulo": "Rayuela (Edición Revisada)",
+  "autor": "Julio Cortázar"
+}
+Respuesta si no existe el libro:
+
+json
+Copiar
+Editar
+{
+  "mensaje": "No se puede actualizar: libro no encontrado"
+}
+DELETE /libros/:id
+Elimina un libro por ID.
+
+Ejemplo request:
+
+bash
+Copiar
+Editar
+DELETE /libros/3
+Respuesta:
+
+json
+Copiar
+Editar
+{
+  "mensaje": "Libro eliminado correctamente",
+  "libro": {
+    "id": 3,
+    "titulo": "Rayuela (Edición Revisada)",
+    "autor": "Julio Cortázar"
+  }
+}
+Respuesta si no existe el libro:
+
+json
+Copiar
+Editar
+{
+  "mensaje": "No se puede eliminar: libro no encontrado"
+}
 
 
 # PRÁCTICA 1 – HERRAMIENTAS DE DESARROLLO DE SOFTWARE

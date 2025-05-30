@@ -1,178 +1,142 @@
+# API REST de Libros en Node.js con Express
 
-# 📚 API REST de Libros en Node.js con Express
-
-Este proyecto es un servicio web RESTful desarrollado con **Node.js** y **Express** para gestionar una colección de libros. Permite **crear, leer, actualizar y eliminar** libros, además de **filtrar por autor**.
+Este proyecto es un servicio web RESTful desarrollado con **Node.js** y **Express** para gestionar una colección de libros. Permite **crear**, **leer**, **actualizar** y **eliminar** libros, además de **filtrar libros por autor**.
 
 ---
 
-## 🌐 URL Base para Consumir la API
+## URL base de la API
 
 La API está desplegada y accesible desde:
 
-**http://3.133.95.14:3000**
+```
+http://3.133.95.14:3000
+```
 
 ---
 
-## 🔧 Endpoints Disponibles
+## Endpoints disponibles
 
-| Método | Endpoint                      | Descripción                        |
-|--------|-------------------------------|------------------------------------|
-| GET    | `/libros`                     | Obtener todos los libros           |
-| GET    | `/libros?autor=<nombre>`      | Filtrar libros por autor           |
-| GET    | `/libros/:id`                 | Obtener libro por ID               |
-| POST   | `/libros`                     | Crear un nuevo libro               |
-| PUT    | `/libros/:id`                 | Actualizar libro por ID            |
-| DELETE | `/libros/:id`                 | Eliminar libro por ID              |
+| Método | Endpoint                        | Descripción                         |
+|--------|----------------------------------|-------------------------------------|
+| GET    | `/libros`                        | Obtener todos los libros            |
+| GET    | `/libros?autor=<nombre>`         | Filtrar libros por autor            |
+| GET    | `/libros/:id`                    | Obtener un libro por su ID          |
+| POST   | `/libros`                        | Crear un nuevo libro                |
+| PUT    | `/libros/:id`                    | Actualizar un libro por su ID       |
+| DELETE | `/libros/:id`                    | Eliminar un libro por su ID         |
 
 ---
 
-## 📘 Explicación Detallada de Endpoints
+## Explicación detallada de los endpoints
 
-### ➤ GET `/libros`
+### `GET /libros`
 
-**Descripción:**  
-Devuelve una lista con todos los libros. Si se incluye el parámetro `autor`, filtra los libros cuyo autor coincida (búsqueda sin distinción entre mayúsculas/minúsculas).
+Devuelve una lista de todos los libros.
 
-**Ejemplos:**
+- Sin parámetros: lista completa.
+- Con `?autor=nombre`: filtra por autor (no distingue mayúsculas o minúsculas).
 
-- Sin filtro:  
-  `GET http://3.133.95.14:3000/libros`
+**Ejemplo sin filtro:**  
+```
+GET http://3.133.95.14:3000/libros
+```
 
+**Respuesta:**
 ```json
 [
-  {
-    "id": 1,
-    "titulo": "Cien Años de Soledad",
-    "autor": "Gabriel García Márquez"
-  },
-  {
-    "id": 2,
-    "titulo": "Don Quijote de la Mancha",
-    "autor": "Miguel de Cervantes"
-  }
+  { "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" },
+  { "id": 2, "titulo": "Don Quijote de la Mancha", "autor": "Miguel de Cervantes" }
 ]
 ```
 
-- Con filtro:  
-  `GET http://3.133.95.14:3000/libros?autor=Gabriel`
+**Ejemplo con filtro:**  
+```
+GET http://3.133.95.14:3000/libros?autor=Gabriel
+```
 
+**Respuesta (si hay coincidencias):**
 ```json
 [
-  {
-    "id": 1,
-    "titulo": "Cien Años de Soledad",
-    "autor": "Gabriel García Márquez"
-  }
+  { "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" }
 ]
 ```
 
-Si no hay coincidencias:
-
+**Respuesta (si no hay coincidencias):**
 ```json
-{
-  "mensaje": "No se encontraron libros del autor \"Gabriel\""
-}
+{ "mensaje": "No se encontraron libros del autor \"Gabriel\"" }
 ```
 
 ---
 
-### ➤ GET `/libros/:id`
+### `GET /libros/:id`
 
-**Descripción:**  
-Devuelve un libro específico por su ID.
+Obtiene un libro por su ID.
 
 **Ejemplo:**
-`GET http://3.133.95.14:3000/libros/1`
-
-```json
-{
-  "id": 1,
-  "titulo": "Cien Años de Soledad",
-  "autor": "Gabriel García Márquez"
-}
 ```
-
-Si el libro no existe:
-
-```json
-{
-  "mensaje": "Libro no encontrado"
-}
-```
-
----
-
-### ➤ POST `/libros`
-
-**Descripción:**  
-Crea un nuevo libro. Se debe enviar un JSON con las propiedades `titulo` y `autor`.
-
-**Cuerpo de la solicitud:**
-
-```json
-{
-  "titulo": "Rayuela",
-  "autor": "Julio Cortázar"
-}
+GET http://3.133.95.14:3000/libros/1
 ```
 
 **Respuesta:**
-
 ```json
-{
-  "id": 3,
-  "titulo": "Rayuela",
-  "autor": "Julio Cortázar"
-}
+{ "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" }
 ```
 
-**Validaciones:**
-
-- Si falta `titulo` o `autor`, responde con error 400.
+**Si no existe:**
+```json
+{ "mensaje": "Libro no encontrado" }
+```
 
 ---
 
-### ➤ PUT `/libros/:id`
+### `POST /libros`
 
-**Descripción:**  
-Actualiza un libro existente por ID.
-
-**Cuerpo de la solicitud:**
-
-```json
-{
-  "titulo": "Rayuela (Edición Revisada)",
-  "autor": "Julio Cortázar"
-}
-```
-
-**Respuesta:**
-
-```json
-{
-  "id": 3,
-  "titulo": "Rayuela (Edición Revisada)",
-  "autor": "Julio Cortázar"
-}
-```
-
-**Validaciones:**
-
-- Si el libro no existe: error 404  
-- Si falta `titulo` o `autor`: error 400
-
----
-
-### ➤ DELETE `/libros/:id`
-
-**Descripción:**  
-Elimina un libro existente por ID.
+Crea un nuevo libro. Se debe enviar un objeto JSON con `titulo` y `autor`.
 
 **Ejemplo:**
-`DELETE http://3.133.95.14:3000/libros/3`
+```json
+{ "titulo": "Rayuela", "autor": "Julio Cortázar" }
+```
 
 **Respuesta:**
+```json
+{ "id": 3, "titulo": "Rayuela", "autor": "Julio Cortázar" }
+```
 
+**Validación:** Si falta título o autor, devuelve 400.
+
+---
+
+### `PUT /libros/:id`
+
+Actualiza un libro existente.
+
+**Ejemplo:**
+```json
+{ "titulo": "Rayuela (Edición Revisada)", "autor": "Julio Cortázar" }
+```
+
+**Respuesta:**
+```json
+{ "id": 3, "titulo": "Rayuela (Edición Revisada)", "autor": "Julio Cortázar" }
+```
+
+**Errores posibles:**  
+- Si no existe el libro: 404.  
+- Si faltan campos: 400.
+
+---
+
+### `DELETE /libros/:id`
+
+Elimina un libro por ID.
+
+**Ejemplo:**
+```
+DELETE http://3.133.95.14:3000/libros/3
+```
+
+**Respuesta:**
 ```json
 {
   "mensaje": "Libro eliminado correctamente",
@@ -184,86 +148,80 @@ Elimina un libro existente por ID.
 }
 ```
 
-Si no existe:
-
+**Si no existe:**
 ```json
-{
-  "mensaje": "No se puede eliminar: libro no encontrado"
-}
+{ "mensaje": "No se puede eliminar: libro no encontrado" }
 ```
 
 ---
 
-## 🐳 Docker: Instalación y Despliegue
-
-### 1️⃣ Instalación de Docker en Ubuntu
+## Instalación de Docker en Ubuntu
 
 ```bash
+# 1. Actualizar el índice de paquetes
 sudo apt update
+
+# 2. Instalar dependencias necesarias
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+# 3. Agregar la clave GPG oficial de Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# 4. Añadir el repositorio de Docker
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+# 5. Verificar la versión de Docker disponible
 apt-cache policy docker-ce
+
+# 6. Instalar Docker
 sudo apt install docker-ce
+
+# 7. Verificar que Docker esté funcionando
 sudo systemctl status docker
 ```
 
-### 2️⃣ Explicación del `Dockerfile`
-
-```dockerfile
-FROM node:20.10.0-alpine3.18
-```
-Utiliza una versión ligera y rápida de Node.js sobre Alpine Linux.
-
-```dockerfile
-WORKDIR /app
-```
-Establece el directorio de trabajo dentro del contenedor.
-
-```dockerfile
-COPY package.json .
-RUN npm i
-```
-Copia el archivo `package.json` y ejecuta `npm install` para instalar dependencias.
-
-```dockerfile
-COPY index.js .
-```
-Copia el archivo principal del servidor.
-
-```dockerfile
-EXPOSE 3000
-```
-Informa a Docker que la aplicación escucha en el puerto 3000.
-
-```dockerfile
-CMD ["node", "index.js"]
-```
-Comando que ejecuta el servidor al iniciar el contenedor.
-
-### 3️⃣ Crear Imagen Docker
-
-```bash
-sudo docker build -t node-hello .
-```
-- `build`: construye una imagen.  
-- `-t node-hello`: asigna nombre a la imagen.  
-- `.`: indica que use el Dockerfile del directorio actual.
-
-### 4️⃣ Ejecutar Contenedor
-
-```bash
-sudo docker run -d -p 3000:3000 --name hello --restart on-failure node-hello:latest
-```
-- `-d`: ejecuta en segundo plano.  
-- `-p 3000:3000`: mapea el puerto del host al contenedor.  
-- `--name hello`: nombra el contenedor.  
-- `--restart on-failure`: reinicia el contenedor si falla.  
-- `node-hello:latest`: usa la imagen recién creada.
+### ¿Qué hace cada comando?
+- `apt update`: actualiza la lista de paquetes.
+- `apt install ...`: instala dependencias necesarias para usar HTTPS y manejar repositorios.
+- `curl -fsSL ... | apt-key add -`: descarga y agrega la clave de confianza de Docker.
+- `add-apt-repository`: registra el repositorio oficial de Docker.
+- `apt-cache policy`: muestra qué versiones están disponibles.
+- `systemctl status docker`: verifica si Docker está activo.
 
 ---
 
+## Dockerfile explicado
 
+```dockerfile
+FROM node:20.10.0-alpine3.18     # Imagen base ligera con Node.js
+WORKDIR /app                    # Directorio de trabajo en el contenedor
+COPY package.json .            # Copia las dependencias
+RUN npm i                      # Instala las dependencias
+COPY index.js .                # Copia el archivo principal
+EXPOSE 3000                    # Expone el puerto 3000 para la API
+CMD ["node", "index.js"]       # Comando que inicia la app
+```
+
+---
+
+## Crear imagen y contenedor con Docker
+
+```bash
+# 1. Construir imagen
+sudo docker build -t node-hello .
+
+# 2. Ejecutar contenedor
+sudo docker run -d -p 3000:3000 --name hello --restart on-failure node-hello:latest
+```
+
+### Explicación de parámetros
+- `-t node-hello`: etiqueta la imagen con ese nombre.
+- `-d`: ejecuta en segundo plano.
+- `-p 3000:3000`: enlaza el puerto local al del contenedor.
+- `--name hello`: nombre del contenedor.
+- `--restart on-failure`: reinicia automáticamente si falla.
+
+---
 
 
 

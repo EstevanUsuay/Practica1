@@ -42,7 +42,6 @@ GET http://3.133.95.14:3000/libros
 
 Respuesta:
 
-```json
 [
   {
     "id": 1,
@@ -59,7 +58,7 @@ Respuesta:
 Ejemplo con filtro por autor:
 GET http://3.133.95.14:3000/libros?autor=Gabriel
 
-Respuesta (si hay coincidencias):
+**Respuesta (si hay coincidencias):**
 [
   {
     "id": 1,
@@ -68,7 +67,7 @@ Respuesta (si hay coincidencias):
   }
 ]
 
-Respuesta (si no hay coincidencias):
+**Respuesta (si no hay coincidencias):**
 {
   "mensaje": "No se encontraron libros del autor \"Gabriel\""
 }

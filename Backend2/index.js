@@ -1,121 +1,122 @@
-// Importar Express
+// Importar Express y configurar el servidor
 const express = require('express');
 const server = express();
-
-// Puerto donde se ejecutará el servidor
 const PORT = 3000;
 
-// Middleware para poder leer datos en formato JSON
+// Middleware para habilitar el uso de JSON en las peticiones
 server.use(express.json());
 
-// Array de Libros
+// Datos simulados: Lista de libros (mock de base de datos)
 let libros = [
-  { "id": 1, "titulo": "Doraemon y la Máquina del Tiempo", "autor": "Fujiko F. Fujio" },
-  { "id": 2, "titulo": "Las Aventuras de Nobita", "autor": "Hiroshi Sato" },
-  { "id": 3, "titulo": "El Secreto del Bolsillo Mágico", "autor": "Keiko Tanaka" },
-  { "id": 4, "titulo": "Doraemon y el Mundo del Futuro", "autor": "Yuki Nakamura" },
-  { "id": 5, "titulo": "Viaje al Centro del Espacio con Doraemon", "autor": "Takeshi Yamamoto" },
-  { "id": 6, "titulo": "Doraemon contra los Dinosaurios", "autor": "Naoko Fujita" }
+  { id: 1, titulo: 'Doraemon y la Máquina del Tiempo', autor: 'Fujiko F. Fujio' },
+  { id: 2, titulo: 'Las Aventuras de Nobita', autor: 'Hiroshi Sato' },
+  { id: 3, titulo: 'El Secreto del Bolsillo Mágico', autor: 'Keiko Tanaka' },
+  { id: 4, titulo: 'Doraemon y el Mundo del Futuro', autor: 'Yuki Nakamura' },
+  { id: 5, titulo: 'Viaje al Centro del Espacio con Doraemon', autor: 'Takeshi Yamamoto' },
+  { id: 6, titulo: 'Doraemon contra los Dinosaurios', autor: 'Naoko Fujita' }
 ];
 
-// Ruta principal (mensaje de bienvenida)
+// Ruta raíz (mensaje de bienvenida)
 server.get('/', (req, res) => {
-    res.send('API REST de libros en Node.js con Express');
+  res.send('Bienvenido a la API REST de Libros basada en Doraemon 🚀');
 });
 
-// Crear un nuevo libro
+// Crear un nuevo libro (POST)
 server.post('/libros', (req, res) => {
-    const { titulo, autor } = req.body;
+  const { titulo, autor } = req.body;
 
-    // Validación de campos obligatorios
-    if (!titulo || !autor) {
-        return res.status(400).json({ mensaje: 'El título y el autor son obligatorios' });
-    }
+  if (!titulo || !autor) {
+    return res.status(400).json({
+      error: 'Solicitud inválida. Debes proporcionar tanto el título como el autor del libro.'
+    });
+  }
 
-    // Crear nuevo objeto libro con ID incremental
-    const nuevoLibro = {
-        id: libros.length ? libros[libros.length - 1].id + 1 : 1,
-        titulo,
-        autor
-    };
+  const nuevoLibro = {
+    id: libros.length ? libros[libros.length - 1].id + 1 : 1,
+    titulo,
+    autor
+  };
 
-    libros.push(nuevoLibro); // Guardar el nuevo libro en el array
-    res.status(201).json(nuevoLibro); // Respuesta con el libro creado
+  libros.push(nuevoLibro);
+  res.status(201).json(nuevoLibro);
 });
 
-// Obtener todos los libros
+// Obtener todos los libros o filtrar por autor (GET)
 server.get('/libros', (req, res) => {
-    const { autor } = req.query;
+  const { autor } = req.query;
 
-    if (autor) {
-        const librosFiltrados = libros.filter(libro =>
-            libro.autor.toLowerCase().includes(autor.toLowerCase())
-        );
+  if (autor) {
+    const resultados = libros.filter(libro =>
+      libro.autor.toLowerCase().includes(autor.toLowerCase())
+    );
 
-        // Si no se encuentra ningún libro que coincida
-        if (librosFiltrados.length === 0) {
-            return res.status(404).json({ mensaje: `No se encontraron libros del autor "${autor}"` });
-        }
-
-        return res.json(librosFiltrados);
+    if (resultados.length === 0) {
+      return res.status(404).json({
+        mensaje: `No se encontraron libros del autor que contenga: "${autor}".`
+      });
     }
 
-    // Si no se pasó el filtro, devolver todos
-    res.json(libros);
+    return res.json(resultados);
+  }
+
+  res.json(libros);
 });
 
-
-// Obtener un libro por su ID
+// Obtener un libro por su ID (GET)
 server.get('/libros/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const libro = libros.find(l => l.id === id);
+  const id = parseInt(req.params.id);
+  const libro = libros.find(l => l.id === id);
 
-    // Si no se encuentra el libro, responder con error 404
-    if (!libro) {
-        return res.status(404).json({ mensaje: 'Libro no encontrado' });
-    }
+  if (!libro) {
+    return res.status(404).json({
+      mensaje: `Libro con ID ${id} no encontrado. Verifica el número e inténtalo nuevamente.`
+    });
+  }
 
-    res.json(libro);
+  res.json(libro);
 });
 
-// Actualizar un libro existente
+// Actualizar un libro existente por ID (PUT)
 server.put('/libros/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const { titulo, autor } = req.body;
+  const id = parseInt(req.params.id);
+  const { titulo, autor } = req.body;
+  const index = libros.findIndex(l => l.id === id);
 
-    const index = libros.findIndex(l => l.id === id);
+  if (index === -1) {
+    return res.status(404).json({
+      mensaje: `No se puede actualizar. El libro con ID ${id} no existe.`
+    });
+  }
 
-    // Si no se encuentra el libro, responder con error 404
-    if (index === -1) {
-        return res.status(404).json({ mensaje: 'No se puede actualizar: libro no encontrado' });
-    }
+  if (!titulo || !autor) {
+    return res.status(400).json({
+      mensaje: 'Actualización incompleta. El título y el autor son campos obligatorios.'
+    });
+  }
 
-    // Validación de campos obligatorios
-    if (!titulo || !autor) {
-        return res.status(400).json({ mensaje: 'El título y el autor son obligatorios para actualizar' });
-    }
-
-    // Actualizar los datos del libro
-    libros[index] = { id, titulo, autor };
-    res.json(libros[index]);
+  libros[index] = { id, titulo, autor };
+  res.json(libros[index]);
 });
 
-// Eliminar un libro por su ID
+// Eliminar un libro por ID (DELETE)
 server.delete('/libros/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const index = libros.findIndex(l => l.id === id);
+  const id = parseInt(req.params.id);
+  const index = libros.findIndex(l => l.id === id);
 
-    // Si no se encuentra el libro, responder con error 404
-    if (index === -1) {
-        return res.status(404).json({ mensaje: 'No se puede eliminar: libro no encontrado' });
-    }
+  if (index === -1) {
+    return res.status(404).json({
+      mensaje: `No se puede eliminar. El libro con ID ${id} no existe en el sistema.`
+    });
+  }
 
-    // Eliminar el libro del array
-    const libroEliminado = libros.splice(index, 1);
-    res.json({ mensaje: 'Libro eliminado correctamente', libro: libroEliminado[0] });
+  const libroEliminado = libros.splice(index, 1);
+  res.json({
+    mensaje: 'Libro eliminado exitosamente.',
+    libro: libroEliminado[0]
+  });
 });
 
-// Iniciar el servidor y escuchar en el puerto especificado
+// Iniciar el servidor
 server.listen(PORT, () => {
-    console.log(`Servidor iniciado correctamente en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor activo en: http://localhost:${PORT}`);
 });

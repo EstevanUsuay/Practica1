@@ -10,11 +10,12 @@ server.use(express.json());
 
 // Array de Libros
 let libros = [
-    { id: 1, titulo: 'Doraemon y la Máquina del Tiempo', autor: 'Fujiko F. Fujio' },
-    { id: 2, titulo: 'Las Aventuras de Nobita', autor: 'Fujiko F. Fujio' },
-    { id: 3, titulo: 'El Secreto del Bolsillo Mágico', autor: 'Fujiko F. Fujio' },
-    { id: 4, titulo: 'Doraemon y el Mundo del Futuro', autor: 'Fujiko F. Fujio' },
-    { id: 5, titulo: 'Viaje al Centro del Espacio con Doraemon', autor: 'Fujiko F. Fujio' }
+  { "id": 1, "titulo": "Doraemon y la Máquina del Tiempo", "autor": "Fujiko F. Fujio" },
+  { "id": 2, "titulo": "Las Aventuras de Nobita", "autor": "Hiroshi Sato" },
+  { "id": 3, "titulo": "El Secreto del Bolsillo Mágico", "autor": "Keiko Tanaka" },
+  { "id": 4, "titulo": "Doraemon y el Mundo del Futuro", "autor": "Yuki Nakamura" },
+  { "id": 5, "titulo": "Viaje al Centro del Espacio con Doraemon", "autor": "Takeshi Yamamoto" },
+  { "id": 6, "titulo": "Doraemon contra los Dinosaurios", "autor": "Naoko Fujita" }
 ];
 
 // Ruta principal (mensaje de bienvenida)

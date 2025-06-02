@@ -10,8 +10,11 @@ server.use(express.json());
 
 // Array de Libros
 let libros = [
-    { id: 1, titulo: 'Cien Años de Soledad', autor: 'Gabriel García Márquez' },
-    { id: 2, titulo: 'Don Quijote de la Mancha', autor: 'Miguel de Cervantes' }
+    { id: 1, titulo: 'Doraemon y la Máquina del Tiempo', autor: 'Fujiko F. Fujio' },
+    { id: 2, titulo: 'Las Aventuras de Nobita', autor: 'Fujiko F. Fujio' },
+    { id: 3, titulo: 'El Secreto del Bolsillo Mágico', autor: 'Fujiko F. Fujio' },
+    { id: 4, titulo: 'Doraemon y el Mundo del Futuro', autor: 'Fujiko F. Fujio' },
+    { id: 5, titulo: 'Viaje al Centro del Espacio con Doraemon', autor: 'Fujiko F. Fujio' }
 ];
 
 // Ruta principal (mensaje de bienvenida)

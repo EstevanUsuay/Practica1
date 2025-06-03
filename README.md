@@ -9,7 +9,7 @@ Este proyecto es un servicio web RESTful desarrollado con **Node.js** y **Expres
 La API está desplegada y accesible desde:
 
 ```
-http://3.133.95.14:3000
+18.222.221.224:3000/libros
 ```
 
 ---
@@ -38,32 +38,36 @@ Devuelve una lista de todos los libros.
 
 **Ejemplo sin filtro:**  
 ```
-GET http://3.133.95.14:3000/libros
+GET http://18.222.221.224:3000/libros
 ```
 
 **Respuesta:**
 ```json
 [
-  { "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" },
-  { "id": 2, "titulo": "Don Quijote de la Mancha", "autor": "Miguel de Cervantes" }
+  { "id": 1, "titulo": "Doraemon y la Máquina del Tiempo", "autor": "Fujiko F. Fujio" },
+  { "id": 2, "titulo": "Las Aventuras de Nobita", "autor": "Hiroshi Sato" },
+  { "id": 3, "titulo": "El Secreto del Bolsillo Mágico", "autor": "Keiko Tanaka" },
+  { "id": 4, "titulo": "Doraemon y el Mundo del Futuro", "autor": "Yuki Nakamura" },
+  { "id": 5, "titulo": "Viaje al Centro del Espacio con Doraemon", "autor": "Takeshi Yamamoto" },
+  { "id": 6, "titulo": "Doraemon contra los Dinosaurios", "autor": "Naoko Fujita" }
 ]
 ```
 
 **Ejemplo con filtro:**  
 ```
-GET http://3.133.95.14:3000/libros?autor=Gabriel
+GET http://18.222.221.224:3000/libros?autor=Usuay
 ```
 
 **Respuesta (si hay coincidencias):**
 ```json
 [
-  { "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" }
+  { "id": 1, "titulo": "Doraemon y la Máquina del Tiempo", "autor": "Naoko Fujita" }
 ]
 ```
 
 **Respuesta (si no hay coincidencias):**
 ```json
-{ "mensaje": "No se encontraron libros del autor \"Gabriel\"" }
+{ "mensaje": "No se encontraron libros del autor \"Usuay\"" }
 ```
 
 ---
@@ -74,17 +78,17 @@ Obtiene un libro por su ID.
 
 **Ejemplo:**
 ```
-GET http://3.133.95.14:3000/libros/1
+GET http://18.222.221.224:3000/libros/5
 ```
 
 **Respuesta:**
 ```json
-{ "id": 1, "titulo": "Cien Años de Soledad", "autor": "Gabriel García Márquez" }
+{ "id": 5, "titulo": "Viaje al Centro del Espacio con Doraemon", "autor": "Takeshi Yamamoto" }
 ```
 
 **Si no existe:**
 ```json
-{ "mensaje": "Libro no encontrado" }
+{ "mensaje": "Libro con ID no encontrado. Verifica el número e inténtalo nuevamente." }
 ```
 
 ---
@@ -95,12 +99,12 @@ Crea un nuevo libro. Se debe enviar un objeto JSON con `titulo` y `autor`.
 
 **Ejemplo:**
 ```json
-{ "titulo": "Rayuela", "autor": "Julio Cortázar" }
+{ "titulo": "Libro Prueba DORAEMON", "autor": "Autor Prueba DORAEMON" }
 ```
 
 **Respuesta:**
 ```json
-{ "id": 3, "titulo": "Rayuela", "autor": "Julio Cortázar" }
+{ "id": 7, "titulo": "Libro Prueba DORAEMON", "autor": "Autor Prueba DORAEMON" }
 ```
 
 **Validación:** Si falta título o autor, devuelve 400.
@@ -113,12 +117,12 @@ Actualiza un libro existente.
 
 **Ejemplo:**
 ```json
-{ "titulo": "Rayuela (Edición Revisada)", "autor": "Julio Cortázar" }
+{ "titulo": "Titulo de Prueba DORAEMON ACTUALIZADO", "autor": "Autor Prueba DORAEMON" }
 ```
 
 **Respuesta:**
 ```json
-{ "id": 3, "titulo": "Rayuela (Edición Revisada)", "autor": "Julio Cortázar" }
+{ "id": 3, "titulo": "Titulo de Prueba DORAEMON ACTUALIZADO", "autor": "Autor Prueba DORAEMON" }
 ```
 
 **Errores posibles:**  
@@ -133,7 +137,7 @@ Elimina un libro por ID.
 
 **Ejemplo:**
 ```
-DELETE http://3.133.95.14:3000/libros/3
+DELETE http://18.222.221.224:3000/libros/7
 ```
 
 **Respuesta:**
@@ -142,15 +146,15 @@ DELETE http://3.133.95.14:3000/libros/3
   "mensaje": "Libro eliminado correctamente",
   "libro": {
     "id": 3,
-    "titulo": "Rayuela (Edición Revisada)",
-    "autor": "Julio Cortázar"
+    "titulo": "Titulo de Prueba DORAEMON ACTUALIZADO",
+    "autor": "Autor de Prueba DORAEMON"
   }
 }
 ```
 
 **Si no existe:**
 ```json
-{ "mensaje": "No se puede eliminar: libro no encontrado" }
+{ "mensaje": "No se puede eliminar. El libro con ID ${id} no existe en el sistema." }
 ```
 
 ---
@@ -208,10 +212,10 @@ CMD ["node", "index.js"]       # Comando que inicia la app
 
 ```bash
 # 1. Construir imagen
-sudo docker build -t node-hello .
+sudo docker build -t node-usuay .
 
 # 2. Ejecutar contenedor
-sudo docker run -d -p 3000:3000 --name hello --restart on-failure node-hello:latest
+sudo docker run -d -p 3000:3000 --name usuay --restart on-failure node-usuay:latest
 ```
 
 ### Explicación de parámetros

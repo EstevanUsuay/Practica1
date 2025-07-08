@@ -50,7 +50,7 @@ app.get('/', async (_req, res) => {
     const productoActualizado = await col.findOne({ _id: insertedId });
 
     res.json({
-      mensaje: '✅ DEMO ejecutada',
+      mensaje: 'DEMO ejecutada',
       insertado: productoEncontrado,
       actualizado: productoActualizado,
       productosElectronica: electronica,
@@ -96,7 +96,7 @@ app.post('/productos', async (req, res) => {
       .insertOne(nuevoProducto);
 
     res.status(201).json({
-      mensaje: '🟢 Producto insertado',
+      mensaje: 'Producto insertado',
       id: resultado.insertedId
     });
   } catch (err) {
@@ -108,5 +108,5 @@ app.post('/productos', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 API escuchando en http://localhost:${PORT}`);
+  console.log(`API escuchando en http://localhost:${PORT}`);
 });

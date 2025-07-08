@@ -1,0 +1,3 @@
+[submodule "nosqlcrud"]
+	path = nosqlcrud
+	url = https://github.com/EstevanUsuay/Practica1.git
